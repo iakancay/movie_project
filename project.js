@@ -4,6 +4,8 @@ const directorElement = document.querySelector("#director");
 const urlElement = document.querySelector("#url");
 
 const ui = new UI();
+const storage= new Storage();
+
 
 eventListeners();
 
@@ -22,7 +24,9 @@ function addFilm(e) {
   } else {
     const newFilm = new Film(title, director, url);
     ui.addFilmToUI(newFilm);
+    storage.addFilmToStorage(newFilm);
     ui.displayMessages("Film başarıyla eklendi...", "success");
+    
   }
 
   ui.clearInputs(titleElement, directorElement, urlElement);
