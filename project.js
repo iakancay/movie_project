@@ -4,14 +4,17 @@ const directorElement = document.querySelector("#director");
 const urlElement = document.querySelector("#url");
 
 const ui = new UI();
-const storage= new Storage();
-
+const storage = new Storage();
 
 eventListeners();
 
 function eventListeners() {
   form.addEventListener("submit", addFilm);
-  form.addEventListener("submit", alert);
+  document.addEventListener("DOMContentLoaded", function () {
+    let films = storage.getFilmsFromStorage();
+    ui.loadAllFilms(films);
+  });
+  
 }
 
 function addFilm(e) {
@@ -26,7 +29,6 @@ function addFilm(e) {
     ui.addFilmToUI(newFilm);
     storage.addFilmToStorage(newFilm);
     ui.displayMessages("Film başarıyla eklendi...", "success");
-    
   }
 
   ui.clearInputs(titleElement, directorElement, urlElement);
