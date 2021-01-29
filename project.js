@@ -2,6 +2,8 @@ const form = document.querySelector("#film-form");
 const titleElement = document.querySelector("#title");
 const directorElement = document.querySelector("#director");
 const urlElement = document.querySelector("#url");
+const cardbody = document.querySelectorAll(".card-body")[1];
+const clear=document.getElementById("clear-films")
 
 const ui = new UI();
 const storage = new Storage();
@@ -14,7 +16,8 @@ function eventListeners() {
     let films = storage.getFilmsFromStorage();
     ui.loadAllFilms(films);
   });
-  
+  cardbody.addEventListener("click", deleteFilm);
+  clear.addEventListener("click",clearAllFilms)
 }
 
 function addFilm(e) {
@@ -33,4 +36,21 @@ function addFilm(e) {
 
   ui.clearInputs(titleElement, directorElement, urlElement);
   e.preventDefault();
+}
+
+function deleteFilm(e) {
+  if (e.target.id === "delete-film") {
+    ui.deleteFilmFromUI(e.target);
+    storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
+    ui.displayMessages("Film başarıyla silindi...", "success");
+  }
+}
+
+function clearAllFilms() {
+  if(confirm("Are you sure to delete all films?",true)){
+     ui.clearAllFilmsFromUI();
+  storage.clearAllFilmsFromStorage();
+  }
+ 
+  
 }
