@@ -26,12 +26,12 @@ function addFilm(e) {
   const url = urlElement.value.trim();
 
   if (title === "" || director === "" || url === "") {
-    ui.displayMessages("Tüm alanları doldurunuz...", "danger");
+    ui.displayMessages("Fill all fields...", "danger");
   } else {
     const newFilm = new Film(title, director, url);
     ui.addFilmToUI(newFilm);
     storage.addFilmToStorage(newFilm);
-    ui.displayMessages("Film başarıyla eklendi...", "success");
+    ui.displayMessages("You added a movie successfully...", "success");
   }
 
   ui.clearInputs(titleElement, directorElement, urlElement);
@@ -42,12 +42,12 @@ function deleteFilm(e) {
   if (e.target.id === "delete-film") {
     ui.deleteFilmFromUI(e.target);
     storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
-    ui.displayMessages("Film başarıyla silindi...", "success");
+    ui.displayMessages("You deleted a movie...", "success");
   }
 }
 
 function clearAllFilms() {
-  if(confirm("Are you sure to delete all films?",true)){
+  if(confirm("Are you sure to delete all movies?",true)){
      ui.clearAllFilmsFromUI();
   storage.clearAllFilmsFromStorage();
   }
